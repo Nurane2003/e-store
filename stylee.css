@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.card{
+    width: 17rem;
+    margin: 50px;
+    margin-top: 85px;
+    margin-left: 10px;
+    border: 2px solid black;
+}
+.card-product{
+    padding-left: 33px;
+    padding-bottom: 20px;
+}
+.card-title{
+    color: black;
+    font-size: larger;
+}
+.card-text{
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
+.add-btn{
+    border: none;
+    border-radius: 7px;
+    background-color: rgb(34, 34, 201);
+    width: 60px;
+    color: aliceblue;
+    padding: 8px;
+}
+.del-btn{
+    border: none;
+    border-radius: 7px;
+    background-color: rgb(214, 31, 31);
+    width: 80px;
+    height: 40px;
+    margin-left: 10px;
+    color: aliceblue;
+    padding: 4px;
+}
+.container{
+    display: flex;
+}
