@@ -16,7 +16,7 @@
 }
 .card-title{
     color: black;
-    font-size: larger;
+    font-size: large;
 }
 .card-text{
     font-weight: bold;
@@ -29,18 +29,21 @@
     background-color: rgb(34, 34, 201);
     width: 60px;
     color: aliceblue;
-    padding: 8px;
+    padding: 7px;
 }
 .del-btn{
     border: none;
     border-radius: 7px;
     background-color: rgb(214, 31, 31);
-    width: 80px;
+    width: 60px;
     height: 40px;
     margin-left: 10px;
     color: aliceblue;
-    padding: 4px;
+    padding: 3px;
 }
 .container{
     display: flex;
+}
+.priceCart{
+    display: none;
 }
