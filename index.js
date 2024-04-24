@@ -2,22 +2,50 @@ const add_btn=document.querySelectorAll('.add-btn')
 const del_btn = document.querySelectorAll('.del-btn')
 const sum_price = document.querySelector('.price')
 const Cart=document.querySelector('.cart')
+const total = document.querySelector(".total");
+const cartProducts=document.querySelector('.priceCart')
 
 
 let obj = {}
-let sum = 0
-Cart.addEventListener('click',function(){
-    document.querySelector('.cards').style.display="none"
-    document.querySelector('.priceCart').style.display="inline-block"
-})
+let sum = 0;
+let isVisible = true;
+
+Cart.addEventListener("click", function () {
+  if (isVisible) {
+    document.querySelector(".cards").style.display = "none";
+    cartProducts.style.display = "block";
+    isVisible = false;
+  } else {
+    document.querySelector(".cards").style.display = "flex";
+    cartProducts.style.display = "none";
+    isVisible = true;
+  }
+
+  let html = "";
+  for (const product in obj) {
+    html += `<li>ad : ${product}<br> qiymet : ${obj[product].price} ₼ <br> eded : ${obj[product].quantity}</li>`;
+
+  }
+
+  cartProducts.children[1].innerHTML = html;
+  calculateTotalAmount();
+ 
+});
+const calculateTotalAmount = () => {
+    let totalSum = 0;
+    for (const product in obj)
+      totalSum += +obj[product].price * +obj[product].quantity;
+  
+    total.textContent = totalSum.toFixed(2);
+  };
 
 
 add_btn.forEach((b) => {
     b.addEventListener('click', () => {
         console.log('add click');
-        sum++
-        const card_prdct = b.closest('.card-product')
-        const name = card_prdct.querySelector('.card-title').textContent
+        sum++;
+        const card_prdct = b.closest('.card-product');
+        const name = card_prdct.querySelector('.card-title').textContent;
         
         if(!obj[name]){
             obj[name] = {
@@ -25,15 +53,15 @@ add_btn.forEach((b) => {
                 price: +b.value
             }
         }else{
-            obj[name].quantity++
+            obj[name].quantity++;
         }
         
 
-       totalPrice(obj[name].quantity, obj[name].price)
+       totalPrice(obj[name].quantity, obj[name].price);
         console.log(obj);
         
-        sum_price.innerText = sum
-        addCart(name)
+        sum_price.innerText = sum;
+        addCart(name);
     })
 })
 
@@ -41,15 +69,17 @@ add_btn.forEach((b) => {
 del_btn.forEach((b) => {
     b.addEventListener('click', () => {
         console.log('del click');
-        sum--
-        sum = sum < 0 ? 0 : sum
-        const card_prdct = b.closest('.card-product')
-        const name = card_prdct.querySelector('.card-title').textContent
-        removeText(name)
+        
+        sum = sum < 0 ? 0 : sum;
+        const card_prdct = b.closest('.card-product');
+        const name = card_prdct.querySelector('.card-title').textContent;
+        if(obj[name]) sum--;
+
+        removeText(name);
         console.log('delete',obj);
-        sum_price.innerText = sum
-    })
-})
+        sum_price.innerText = sum;
+    });
+});
 
 function totalPrice(a,b){
      console.log(a*b);
@@ -57,14 +87,15 @@ function totalPrice(a,b){
 function removeText(name){
     if(obj[name]){
         if(obj[name].quantity===1){
-            delete obj[name]
+            delete obj[name];
         }else{
-            obj[name].quantity--
+            obj[name].quantity--;
         }
     }
 }
+let priceCart=document.querySelector('.priceCart')
 function addCart(name){
-    const cartProducts=document.querySelector('.priceCart')
+    const cartProducts=document.querySelectorAll('.cartName')
     for(let i=0;i< cartProducts.length;i++){
         if(cartProducts[i].textContent===name){
             const quantityText=cartProducts[i].nextElementSibling.nextElementSibling;
@@ -74,15 +105,9 @@ function addCart(name){
         }
     }
 
-    priceCart.innerHtml +=`
-    <div class="border border-dark rounded text-center mx-2 p-2 fw-bold" style="width:20%;background-color:blue"
-    <h5>${name}</h5>
-    <p>Price: ${obj[name].price}₼</p>
-    <p>Count: ${obj[name].quantity}</p>
-    </div>`;
+  
 }
 function removeCart(name){
-    const cartProducts=document.querySelector('.priceCart h5')
     for(let i=0;i<cartProducts.length;i++){
         if(cartProducts[i].textContent===name){
             const quantityText=cartProducts[i].nextElementSibling.nextElementSibling;
@@ -93,4 +118,4 @@ function removeCart(name){
             }
         }
     }
-}
+}                    

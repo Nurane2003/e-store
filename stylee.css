@@ -46,4 +46,12 @@
 }
 .priceCart{
     display: none;
+    background-color: cadetblue;
+    width: 380px;
+    border-radius: 7px;
+    padding: 10px;
+    font-weight: bold;
+}
+.priceCart h3{
+    color: rgb(180, 44, 44);
 }
