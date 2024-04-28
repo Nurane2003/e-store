@@ -1,22 +1,55 @@
-const add_btn=document.querySelectorAll('.add-btn')
-const del_btn = document.querySelectorAll('.del-btn')
-const sum_price = document.querySelector('.price')
-const Cart=document.querySelector('.cart')
+const add_btn=document.querySelectorAll('.add-btn');
+const del_btn = document.querySelectorAll('.del-btn');
+const sum_price = document.querySelector('.price');
+const cart=document.querySelector('.cart');
 const total = document.querySelector(".total");
-const cartProducts=document.querySelector('.priceCart')
+const cards=document.querySelector('.cards');
+const container2=document.querySelector('.container2')
+const container3=document.querySelector('.container3')
+const cartProducts=document.querySelector('.priceCart');
+const btn1=document.querySelector('.btn-1');
+const btn2=document.querySelector('.btn-2');
+const btn3=document.querySelector('.btn-3');
+
+container2.style.display="none"
+container3.style.display="none"
 
 
-let obj = {}
 let sum = 0;
 let isVisible = true;
 
-Cart.addEventListener("click", function () {
+
+btn1.addEventListener('click',function(){
+    container2.style.display="none";
+    container3.style.display="none"
+    cards.style.display="flex"
+    cartProducts.style.display = "none";
+})
+
+btn2.addEventListener('click',function(){
+   cards.style.display="none";
+   container3.style.display="none"
+   container2.style.display="flex"
+   cartProducts.style.display = "none";
+})
+btn3.addEventListener('click',function(){
+    cards.style.display="none";
+    container2.style.display="none";
+    container3.style.display="flex";
+    cartProducts.style.display = "none";
+})
+
+cart.addEventListener("click", function () {
   if (isVisible) {
-    document.querySelector(".cards").style.display = "none";
+    cards.style.display = "none";
+    container2.style.display="none";
+    container3.style.display="none"
     cartProducts.style.display = "block";
     isVisible = false;
   } else {
-    document.querySelector(".cards").style.display = "flex";
+    cards.style.display = "flex";
+    container2.style.display="flex"
+    container3.style.display="flex"
     cartProducts.style.display = "none";
     isVisible = true;
   }
@@ -45,7 +78,7 @@ add_btn.forEach((b) => {
         console.log('add click');
         sum++;
         const card_prdct = b.closest('.card-product');
-        const name = card_prdct.querySelector('.card-title').textContent;
+        const name = card_prdct.querySelector('.card-h5').textContent;
         
         if(!obj[name]){
             obj[name] = {
@@ -72,7 +105,8 @@ del_btn.forEach((b) => {
         
         sum = sum < 0 ? 0 : sum;
         const card_prdct = b.closest('.card-product');
-        const name = card_prdct.querySelector('.card-title').textContent;
+        const name = card_prdct.querySelector('.card-h5').textContent;
+        
         if(obj[name]) sum--;
 
         removeText(name);
